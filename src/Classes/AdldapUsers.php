@@ -47,6 +47,11 @@ class AdldapUsers extends AbstractAdldapQueryable
         $personCategory = $this->adldap->getPersonFilter('category');
         $person = $this->adldap->getPersonFilter('person');
 
+        //explicitly add sort field in list of fields
+        if ($sorted and count($fields) > 0 and !in_array($sortBy, $fields)) {
+            array_push($fields, $sortBy);
+        }
+
         $search = $this->adldap->search()
             ->select($fields)
             ->where($personCategory, '=', $person)
