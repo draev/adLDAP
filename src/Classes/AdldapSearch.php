@@ -509,9 +509,7 @@ class AdldapSearch extends AbstractAdldapBase
     {
         if (count($objects) > 0) {
             foreach ($objects as $key => $row) {
-                if (array_key_exists($this->sortByField, $row)) {
-                    $sort[$key] = $row[$this->sortByField];
-                }
+                $sort[$key] = array_key_exists($this->sortByField, $row) ? $row[$this->sortByField] : false;
             }
 
             array_multisort($sort, $this->sortByDirection, $objects);
